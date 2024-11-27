@@ -1,8 +1,20 @@
+// src/admin/dto/create-admin.dto.ts
+import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
+
 export class CreateAdminDto {
-  namaDepan: string;
-  namaBelakang: string;
+  @IsEmail()
+  @IsNotEmpty()
   email: string;
-  tanggalLahir: string;
-  jenisKelamin: string;
+
+  @IsString()
+  @IsNotEmpty()
   password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  nama_depan: string;
+
+  @IsString()
+  @IsNotEmpty()
+  nama_belakang: string;
 }

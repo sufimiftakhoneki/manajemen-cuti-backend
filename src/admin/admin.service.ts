@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // src/admin/admin.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -5,11 +6,19 @@ import { Repository } from 'typeorm';
 import { Admin } from './admin.entity';
 import * as bcrypt from 'bcryptjs';
 import { CreateAdminDto } from './dto/create-admin.dto';  // Assuming DTO is used
+=======
+import { Injectable } from '@nestjs/common';
+import { Admin } from './admin.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import * as bcrypt from 'bcryptjs';
+>>>>>>> 57f3f19476b1b4c8248fd93c449eb65202f5fef5
 
 @Injectable()
 export class AdminService {
   constructor(
     @InjectRepository(Admin)
+<<<<<<< HEAD
     private readonly adminRepository: Repository<Admin>,
   ) {}
 
@@ -42,6 +51,11 @@ export class AdminService {
     await this.adminRepository.delete(id);  // Delete admin by ID
   }
   
+=======
+    private adminRepository: Repository<Admin>,
+  ) {}
+
+>>>>>>> 57f3f19476b1b4c8248fd93c449eb65202f5fef5
   async login(email: string, password: string): Promise<any> {
     const admin = await this.adminRepository.findOne({ where: { email } });
     if (!admin) throw new Error('Admin not found');
@@ -53,8 +67,11 @@ export class AdminService {
     return { message: 'Login successful' }; // Cukup kirimkan pesan atau data yang relevan
   }
 }
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> 57f3f19476b1b4c8248fd93c449eb65202f5fef5

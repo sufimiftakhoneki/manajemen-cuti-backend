@@ -1,8 +1,4 @@
 
-# manajemen-cuti-backend
-=======
-=======
->>>>>>> 57f3f19476b1b4c8248fd93c449eb65202f5fef5
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>

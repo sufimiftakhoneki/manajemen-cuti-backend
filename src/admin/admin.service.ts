@@ -1,24 +1,16 @@
-<<<<<<< HEAD
 // src/admin/admin.service.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Admin } from './admin.entity';
 import * as bcrypt from 'bcryptjs';
 import { CreateAdminDto } from './dto/create-admin.dto';  // Assuming DTO is used
-=======
-import { Injectable } from '@nestjs/common';
-import { Admin } from './admin.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import * as bcrypt from 'bcryptjs';
->>>>>>> 57f3f19476b1b4c8248fd93c449eb65202f5fef5
+import { AdminLoginDto } from './dto/admin-login.dto'; // Login DTO
 
 @Injectable()
 export class AdminService {
   constructor(
     @InjectRepository(Admin)
-<<<<<<< HEAD
     private readonly adminRepository: Repository<Admin>,
   ) {}
 
@@ -51,27 +43,34 @@ export class AdminService {
     await this.adminRepository.delete(id);  // Delete admin by ID
   }
   
-=======
-    private adminRepository: Repository<Admin>,
-  ) {}
-
->>>>>>> 57f3f19476b1b4c8248fd93c449eb65202f5fef5
-  async login(email: string, password: string): Promise<any> {
+  async validateAdmin(email: string, password: string): Promise<Admin> {
     const admin = await this.adminRepository.findOne({ where: { email } });
-    if (!admin) throw new Error('Admin not found');
 
-    const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) throw new Error('Invalid credentials');
+    if (!admin) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
 
-    // Jika login berhasil, kita tidak menggunakan JWT
-    return { message: 'Login successful' }; // Cukup kirimkan pesan atau data yang relevan
+    // Compare the provided password with the stored hashed password
+    const isPasswordValid = await bcrypt.compare(password, admin.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    return admin;
+  }
+
+  // Login method that returns a success message if the credentials are valid
+  async login(adminLoginDto: AdminLoginDto) {
+    const { email, password } = adminLoginDto;
+
+    // Validate the admin credentials
+    const admin = await this.validateAdmin(email, password);
+
+    // You can also return a simple success message here
+    return {
+      message: 'Login successful',
+      adminId: admin.id,
+      adminEmail: admin.email,
+    };
   }
 }
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> 57f3f19476b1b4c8248fd93c449eb65202f5fef5

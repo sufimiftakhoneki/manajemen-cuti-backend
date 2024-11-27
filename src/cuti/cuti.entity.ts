@@ -6,16 +6,16 @@ export class Cuti {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ManyToOne(() => Pegawai)
+  @JoinColumn({ name: 'pegawai_id' })
+  pegawai: Pegawai;
+
   @Column()
   alasanCuti: string;
 
   @Column()
-  tanggalMulaiCuti: Date;
+  tanggalMulai: Date;
 
   @Column()
-  tanggalSelesaiCuti: Date;
-
-  @ManyToOne(() => Pegawai, (pegawai) => pegawai.cuti)
-  @JoinColumn({ name: 'pegawai_id' })
-  pegawai: Pegawai;
+  tanggalSelesai: Date;
 }

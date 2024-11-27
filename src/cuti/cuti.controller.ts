@@ -1,31 +1,29 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { CutiService } from './cuti.service';
-import { Cuti } from './cuti.entity';
 import { CreateCutiDto } from './dto/create-cuti.dto';
+import { UpdateCutiDto } from './dto/update-cuti.dto';
 
 @Controller('cuti')
 export class CutiController {
   constructor(private readonly cutiService: CutiService) {}
 
-  @Post()
-  async create(@Body() createCutiDto: CreateCutiDto) {
-    const cuti = new Cuti();
-    Object.assign(cuti, createCutiDto);
-    return this.cutiService.create(cuti);
-  }
-
   @Get()
-  async findAll(): Promise<Cuti[]> {
+  findAll() {
     return this.cutiService.findAll();
   }
 
-  @Get('pegawai/:pegawaiId')
-  async findByPegawai(@Param('pegawaiId') pegawaiId: number): Promise<Cuti[]> {
-    return this.cutiService.findByPegawai(pegawaiId);
+  @Post()
+  create(@Body() createCutiDto: CreateCutiDto) {
+    return this.cutiService.create(createCutiDto);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() updateCutiDto: UpdateCutiDto) {
+    return this.cutiService.update(id, updateCutiDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
-    return this.cutiService.remove(id);
+  delete(@Param('id') id: number) {
+    return this.cutiService.delete(id);
   }
 }

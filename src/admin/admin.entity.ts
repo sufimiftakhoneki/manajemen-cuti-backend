@@ -1,3 +1,4 @@
+// src/admin/admin.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
 
 @Entity()

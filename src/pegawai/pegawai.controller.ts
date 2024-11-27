@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { PegawaiService } from './pegawai.service';
-import { Pegawai } from './pegawai.entity';
 import { CreatePegawaiDto } from './dto/create-pegawai.dto';
+import { Pegawai } from './pegawai.entity';
 
 @Controller('pegawai')
 export class PegawaiController {
@@ -11,6 +11,8 @@ export class PegawaiController {
   async create(@Body() createPegawaiDto: CreatePegawaiDto) {
     const pegawai = new Pegawai();
     Object.assign(pegawai, createPegawaiDto);
+
+    // Menyimpan pegawai
     return this.pegawaiService.create(pegawai);
   }
 
@@ -25,7 +27,7 @@ export class PegawaiController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: number, @Body() updatePegawaiDto: Partial<Pegawai>) {
+  async update(@Param('id') id: number, @Body() updatePegawaiDto: Partial<CreatePegawaiDto>) {
     return this.pegawaiService.update(id, updatePegawaiDto);
   }
 

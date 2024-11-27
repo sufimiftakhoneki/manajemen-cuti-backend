@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2024 at 03:23 AM
+-- Generation Time: Nov 27, 2024 at 06:21 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `email`, `password`, `namaDepan`, `namaBelakang`, `tanggalLahir`, `jenisKelamin`) VALUES
-(1, 'admin@example.com', '$2a$12$lJSEmfejXRqU4XSGuOsone0SIPtS76VxAmMQ/HToCtopT0aDGBela', 'Admin', 'Test', '1998-04-25', 'Laki-Laki');
+(1, 'admin@example.com', '$2a$12$lJSEmfejXRqU4XSGuOsone0SIPtS76VxAmMQ/HToCtopT0aDGBela', 'Admin', 'Test', '1998-04-25', 'Laki-Laki'),
+(2, 'sufi@example.com', '$2a$10$dJ0nX95hczbHi7T8A9GtxOpDj0Cv.0VLmAOduzKms630kAt7/cQu.', 'Test', '2', '2004-12-27', 'Laki-laki'),
+(4, 'DZAKY@EXAMPEL.COM', '$2a$10$OfkJA4W7kcPe1XLDYzoVCejZvkGFwuMk4qAPVxWuPMdgIXX3m.Wkq', 'Test', '3', '2024-11-26', 'Laki-laki');
 
 -- --------------------------------------------------------
 
@@ -54,9 +56,16 @@ CREATE TABLE `cuti` (
   `id` int(11) NOT NULL,
   `pegawai_id` int(11) DEFAULT NULL,
   `alasanCuti` varchar(255) NOT NULL,
-  `tanggalMulaiCuti` datetime NOT NULL,
-  `tanggalSelesaiCuti` datetime NOT NULL
+  `tanggalMulai` datetime NOT NULL,
+  `tanggalSelesai` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cuti`
+--
+
+INSERT INTO `cuti` (`id`, `pegawai_id`, `alasanCuti`, `tanggalMulai`, `tanggalSelesai`) VALUES
+(10, NULL, 'Sakit', '2024-11-27 00:00:00', '2024-11-27 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -73,6 +82,15 @@ CREATE TABLE `pegawai` (
   `jenisKelamin` varchar(255) NOT NULL,
   `alamat` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pegawai`
+--
+
+INSERT INTO `pegawai` (`id`, `email`, `namaDepan`, `namaBelakang`, `noHp`, `jenisKelamin`, `alamat`) VALUES
+(3, 'jane.smith@example.com', 'Jane', 'Smith', '', '', ''),
+(4, 'sufi@example.com', 'Test', 'Kerja', '', 'Laki-laki', 'Jl.Gresik No.777 Panyuran,Palang,Tuban'),
+(7, 'DZAKY@EXAMPEL.COM', 'Test', '3', '', 'Laki-laki', 'Jl.Gresik No.777 Panyuran,Palang,Tuban');
 
 --
 -- Indexes for dumped tables
@@ -105,19 +123,19 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cuti`
 --
 ALTER TABLE `cuti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

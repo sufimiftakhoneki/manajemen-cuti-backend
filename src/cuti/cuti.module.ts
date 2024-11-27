@@ -1,17 +1,13 @@
-// src/cuti/cuti.module.ts
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { CutiService } from './cuti.service';
 import { CutiController } from './cuti.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Cuti } from './cuti.entity';
-import { PegawaiModule } from '../pegawai/pegawai.module';  // Impor PegawaiModule untuk relasi Pegawai
+import { PegawaiModule } from '../pegawai/pegawai.module';  // Impor PegawaiModule
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Cuti]),  // Menambahkan entitas Cuti ke module
-    PegawaiModule,  // Mengimpor PegawaiModule untuk akses Pegawai
-  ],
-  providers: [CutiService],
+  imports: [TypeOrmModule.forFeature([Cuti]), PegawaiModule],  // Masukkan PegawaiModule ke dalam imports
   controllers: [CutiController],
+  providers: [CutiService],
 })
 export class CutiModule {}
